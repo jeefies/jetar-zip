@@ -1,3 +1,4 @@
+import io
 import codecs
 from collections import deque
 
@@ -15,7 +16,7 @@ class Base:
     def addf(self, fn):
         with codecs.open(fn, 'rb') as f:
             con = f.read()
-        self.add(fn, con)
+        return self.add(fn, con)
 
     def get(self, title):
         for t, c in self.files:
@@ -26,3 +27,9 @@ class Base:
 
     def list(self):
         return tuple(map(lambda x: x[0], self.files))
+
+    def add_form_data(self, data):
+        fn = data.filename
+        b = io.BytesIO()
+        data.save(b)
+        return self.add(fn, b.read())

@@ -29,6 +29,7 @@ class ZipFile(Base):
         for t, c in self.files:
             zf.writestr(t, c)
         zf.close()
+        f.seek(0)
         return f
 
     def save(self, fn):

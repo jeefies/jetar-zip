@@ -41,6 +41,7 @@ class TarFile(Base):
         for t, c in self.files:
             zf.addfile(ti(t), c)
         zf.close()
+        f.seek(0)
         return f
 
     def save(self, fn):
